@@ -56,7 +56,7 @@ const page = () => {
             {
               exploreCategory.map((category: ExploreCategory) => (
                 <div key={category.id} className='flex relative flex-col gap-1 mb-5'>
-                  <img className='w-[100%] h-[150px] object-cover' src={category.img} alt="" />
+                  <img className='w-[100%] h-[160px] object-cover' src={category.img} alt="" />
                   <div className='bg-[#000000] absolute w-full bottom-0'>
                     <h1 className='text-[#ffffff] ml-4 mt-3 font-[700] text-[18px]'>{category.name}</h1>
                   </div>
