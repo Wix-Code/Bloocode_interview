@@ -5,7 +5,7 @@ const NewlyAddedEpisodes = () => {
   return (
     <div>
       <div className='max-w-[1200px] max-sm:mx-5 mx-auto overflow-hidden'>
-        <p className='text-[24px] max-sm:text-[18px] mt-5 text-[#282828] font-[700]'>Newly added episodes</p>
+        <p className='text-[24px] max-sm:text-[15px] mt-5 text-[#282828] font-[700]'>Newly added episodes</p>
         <div className="flex items-start mt-5 gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 pb-4 hide-scrollbar">
           {
             podcasts.map((podcast) => {
