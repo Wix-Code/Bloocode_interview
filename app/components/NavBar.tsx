@@ -1,13 +1,18 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 import { Links } from '../dummyData'
 import { CiSearch } from 'react-icons/ci'
+import { FaBars } from 'react-icons/fa'
+import ResponsiveNavbar from './ResponsiveNavbar'
 
 const NavBar = () => {
+  const[openNav, setOpenNav] = useState<boolean>(false)
   return (
-    <div className='bg-[#FFFFFF] sticky z-50 top-0 max-sm:hidden'>
-      <div className='max-w-[1200px] mx-auto flex items-center h-[80px] justify-between py-5'>
-        <img className='w-[150px]' src="/files/afr.png" alt="" />
-        <div className='flex items-center gap-4'>
+    <div className='bg-[#FFFFFF] sticky z-50 top-0'>
+      <div className='max-w-[1200px] max-sm:relative mx-auto flex items-center h-[80px] justify-between py-5'>
+        <img className='w-[150px] max-sm:w-[80px] ml-5' src="/files/afr.png" alt="" />
+        <div className='flex items-center max-sm:hidden gap-4'>
           {
             Links.map((link) => (
               <a href={link.url} key={link.id} className='text-[#282828] text-[15px] font-[700] capitalize hover:text-[#636363] pr-4'>{link.name}</a>
@@ -18,8 +23,12 @@ const NavBar = () => {
             <input className='outline-hidden' type="text" placeholder='Search' name="" id="" />
           </div>
         </div>
+        <div>
+          {openNav && (<ResponsiveNavbar setOpenNav={setOpenNav} />)}
+        </div>
+        <button onClick={() => setOpenNav(!openNav)} className='max-sm:flex hidden mr-5'><FaBars /></button>
       </div>
-      <div className='py-2 flex w-[100%] items-center'>
+      <div className='py-2 flex w-[100%] max-sm:hidden items-center'>
         <img className='w-[40%] h-[60px]' src="/files/ba.png" alt="" />
         <div className='flex w-[60%] bg-[#1B1B1B] gap-8 justify-center items-center h-[60px]'>
           <div className='flex text-[#FFFFFF] bg-[#1B1B1B] items-center gap-2'>

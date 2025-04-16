@@ -1,10 +1,25 @@
+"use client"
 import React from 'react'
 import Banner from '../components/Banner'
 import { podcasts } from '../dummyData'
 import { IoIosArrowBack } from 'react-icons/io'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { useSinglePodcast } from '../utils/podcastQuerry'
 
 const page = () => {
+  const params = useParams();
+  const id = params?.id;
+
+  const podcastId = typeof id === 'string' ? id : '';
+
+  const { data: podcast, isLoading, isError } = useSinglePodcast(podcastId);
+
+  //if (!podcastId) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading podcast...</p>;
+  if (isError) return <p>Something went wrong</p>;
+  console.log(podcast, 'podcast single')
+
   return (
     <div className='mb-20'>
       <div className='bg-[#2B3221] py-10'>

@@ -5,6 +5,9 @@ import { podcasts } from '../dummyData'
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../utils/store';
 import { usePodcastData } from '../utils/podcastQuerry';
+import { HiDotsHorizontal } from 'react-icons/hi';
+import { RiPlayLargeFill, RiPlayReverseLargeFill } from 'react-icons/ri';
+import Spinner from '../components/Spinner';
 
 interface Podcasts { 
   id: number;
@@ -14,18 +17,19 @@ interface Podcasts {
   part: string;
 }
 const page = () => {
-  const { data: podcasts, isLoading, error } = usePodcastData();
+  const [page, setPage] = useState(1);
+  const { data: podcasts, isLoading, error } = usePodcastData(page);
   const dispatch = useDispatch<AppDispatch>();
-  const [currentPage, setCurrentPage] = useState(1);
+  //const [currentPage, setCurrentPage] = useState(1);
   const podcastsPerPage = 8;
 
-  const totalPages = Math.ceil((podcasts?.length || 0)  / podcastsPerPage);
+  /*const totalPages = Math.ceil((podcasts?.length || 0)  / podcastsPerPage);
   const startIndex = (currentPage - 1) * podcastsPerPage;
-  const currentPodcasts = podcasts?.slice(startIndex, startIndex + podcastsPerPage);
+  const currentPodcasts = podcasts?.slice(startIndex, startIndex + podcastsPerPage);*/
 
-  if (isLoading) return <p>Loading podcasts...</p>;
+  if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
-  if (!Array.isArray(podcasts)) return <p>No podcasts available.</p>;
+  //if (!Array.isArray(podcasts)) return <p>No podcasts available.</p>;
   return (
     <div>
       <div className='bg-[#2B3221] max-sm:flex-col mb-10 relative p-10 flex items-center gap-7'>
@@ -44,11 +48,11 @@ const page = () => {
       </div>
       <div className='flex max-w-[1200px] justify-between mb-10 m-auto max-sm:flex-col'>
         <div className='flex w-[70%] max-sm:w-full flex-col'>
-          <p className='text-[#5A5A5A] p-4 text-[18px] font-[800]'>ALL EPISODES  <span className='font-[500]'>({podcasts?.length} Available)</span></p>
+          <p className='text-[#5A5A5A] p-4 text-[18px] font-[800]'>ALL EPISODES  <span className='font-[500]'>({podcasts?.data?.length} Available)</span></p>
           <hr className='w-full bg-[#DCDCDC] h-[1px] border-0' />
           <div className='max-sm-w-full'>
             {
-              currentPodcasts?.map((category) => (
+              podcasts?.data?.map((category) => (
                 <div key={category.id} className='flex p-5 max-sm:w-full border-b-[1px] border-[#DCDCDC] flex-row max-sm:flex-col gap-4'>
                   <img className='w-[157px] max-sm:h-[250px] h-[129px] max-sm:w-full object-cover' src={category.picture_url} alt="" />
                   <div className='max-sm:w-full'>
@@ -67,19 +71,49 @@ const page = () => {
             }
           </div>
           <div className="flex gap-2 justify-center mt-6">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`px-4 py-2 cursor-pointer rounded ${
-                  page === currentPage
-                    ? 'bg-[#2C2C2C] text-white'
-                    : 'bg-[#AEAEAE] text-[#FFFFFF]'
-                }`}
-              >
-                {page}
-              </button>
-            ))}
+            <button
+                disabled={page === 1}
+                onClick={() => setPage((prev) => prev - 1)}
+                className={`cursor-pointer text-[2C2C2C] ${page === 1 && 'text-[#AEAEAE]'}`}
+            >
+              <RiPlayReverseLargeFill />
+            </button>
+    
+            {Array.from({ length: podcasts?.last_page || 1 }, (_, i) => i + 1)
+            .filter((pg) => {
+              return (
+                pg === 1 || // always show first
+                pg === podcasts?.last_page || // always show last
+                (pg >= page - 2 && pg <= page + 2) // show window around current page
+              );
+            })
+            .map((pg, index, arr) => {
+              const prevPage = arr[index - 1];
+              const isEllipsisNeeded = prevPage && pg - prevPage > 1;
+    
+              return (
+                <React.Fragment key={pg}>
+                  {isEllipsisNeeded && (
+                    <span className="px-2 text-[16px] text-[#AEAEAE] flex items-center  justify-center select-none"><HiDotsHorizontal /></span>
+                  )}
+                  <button
+                    onClick={() => setPage(pg)}
+                    className={`px-3 font-[500] text-[13px] w-[30px] cursor-pointer justify-center items-center flex h-[30px] rounded ${
+                      pg === page ? 'bg-[#2C2C2C] text-[#FFFFFF]' : 'bg-[#AEAEAE]'
+                    }`}
+                  >
+                    {pg}
+                  </button>
+                </React.Fragment>
+              );
+            })}
+            <button
+              disabled={page === podcasts?.last_page}
+              onClick={() => setPage((prev) => prev + 1)}
+              className={`cursor-pointer text-[2C2C2C] ${page === podcasts?.last_page && 'text-[#AEAEAE]'}`}
+            >
+              <RiPlayLargeFill />
+            </button>
           </div>
         </div>
         <div className='w-[20%] max-sm:mt-10 max-sm:w-full'>
