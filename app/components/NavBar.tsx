@@ -4,7 +4,7 @@ import { CiSearch } from 'react-icons/ci'
 
 const NavBar = () => {
   return (
-    <div className='bg-[#FFFFFF] sticky z-50 top-0'>
+    <div className='bg-[#FFFFFF] sticky z-50 top-0 max-sm:hidden'>
       <div className='max-w-[1200px] mx-auto flex items-center h-[80px] justify-between py-5'>
         <img className='w-[150px]' src="/files/afr.png" alt="" />
         <div className='flex items-center gap-4'>
