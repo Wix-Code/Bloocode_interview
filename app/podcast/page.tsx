@@ -57,8 +57,8 @@ const page = () => {
                     <p className='text-[#282828] text-[15px] font-[500]'>{category.description.slice(0, 350)}...</p>
                     <div className='flex items-center mt-3 gap-4'>
                       <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/u.png" /></button>
+                      <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/b.png" /></button>
                       <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/share.png" /></button>
-                      <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/gr.png" /></button>
                       <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/gr.png" /></button>
                     </div>
                   </div>
