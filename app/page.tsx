@@ -6,11 +6,13 @@ import OtherPodcasts from './components/OtherPodcasts'
 import Adds from './components/Adds'
 import Educational from './components/Educational'
 import EntertainmentLifeStyle from './components/EntertainmentLifeStyle'
+import NewlyAddedEpisodes from './components/NewlyAddedEpisodes'
 
 const page = () => {
   return (
     <div>
       <Adds />
+      <NewlyAddedEpisodes />
       <Educational />
       <EntertainmentLifeStyle />
       <TechSportsBusiness />

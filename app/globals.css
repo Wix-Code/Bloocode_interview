@@ -10,3 +10,11 @@
 -webkit-box-shadow: 3px 10px 0px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 3px 10px 0px 0px rgba(0,0,0,0.75);**/
 }
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
