@@ -8,11 +8,13 @@ import Educational from './components/Educational'
 import EntertainmentLifeStyle from './components/EntertainmentLifeStyle'
 import NewlyAddedEpisodes from './components/NewlyAddedEpisodes'
 import NewsStoryTelling from './components/NewsStoryTelling'
+import TrendingThisWeek from './components/TrendingThisWeek'
 
 const page = () => {
   return (
     <div>
       <Adds />
+      <TrendingThisWeek />
       <NewlyAddedEpisodes />
       <NewsStoryTelling />
       <Educational />

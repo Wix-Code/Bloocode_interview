@@ -51,22 +51,22 @@ export const categories: Category[] = [
   {
     id: 1,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/av.png',
   },
   {
     id: 2,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/ad2.png',
   },
   {
     id: 3,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/adv.png',
   },
   {
     id: 4,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/ad1.png',
   },
   {
     id: 5,
@@ -89,21 +89,21 @@ export const podcasts: Podcasts[] = [
   {
     id: 1,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/j.png',
     desc: "Cardio Vascular Exercise Part 3",
     part: "Part 3",
   },
   {
     id: 2,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/av.png',
     desc: "Cardio Vascular Exercise Part 3",
     part: "Part 3",
   },
   {
     id: 3,
     name: 'Fitness Focus',
-    img: '/files/im.png',
+    img: '/files/ad2.png',
     desc: "Cardio Vascular Exercise Part 3",
     part: "Part 3",
   },
