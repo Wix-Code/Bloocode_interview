@@ -1,6 +1,10 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { exploreCategory, podcasts } from '../dummyData';
+import { usePodcasts } from '../utils/podcastQuerry';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../utils/store';
 
 interface Podcasts { 
   id: number;
@@ -16,6 +20,19 @@ interface ExploreCategory {
   img: string;
 }
 const page = () => {
+  const { data: podcasts, isLoading, error } = usePodcasts();
+  const dispatch = useDispatch<AppDispatch>();
+  const [currentPage, setCurrentPage] = useState(1);
+  const podcastsPerPage = 8; 
+  const totalPages = Math.ceil((podcasts?.length || 0) / podcastsPerPage);
+  const startIndex = (currentPage - 1) * podcastsPerPage;
+  const currentPodcasts = podcasts?.slice(startIndex, startIndex + podcastsPerPage);
+
+  console.log(podcasts, 'podcast')
+
+  if (isLoading) return <p>Loading podcasts...</p>;
+  if (error) return <p>Failed to load podcasts</p>;
+  if (!Array.isArray(podcasts)) return <p>No podcasts available.</p>;
   return (
     <div className='mt-5 mb-32'>
       <div className='flex flex-col gap-4 max-w-[1200px] mx-auto'>
@@ -34,11 +51,11 @@ const page = () => {
         </div>
         <div className='grid mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-2'>
           {
-            podcasts.map((podcast: Podcasts) => (
+            Array.isArray(currentPodcasts) && currentPodcasts.map((podcast) => (
               <div key={podcast.id} className='flex flex-col max-sm:gap-[2px] gap-1'>
-                <img className='w-[100%] h-[180px] object-cover' src={podcast.img} alt="" />
-                <h1 className='text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]'>{podcast.name}</h1>
-                <p className='text-[15px] max-sm:text-[13px] text-[#282828]'>EPI2: {podcast.desc}</p>
+                <img className='w-[100%] h-[180px] object-cover' src={podcast.picture_url} alt="" />
+                <h1 className='text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]'>{podcast.title.slice(0, 15)}...</h1>
+                <p className='text-[15px] max-sm:text-[13px] text-justify text-[#282828]'>EPI2: {podcast.description.slice(0, 40)}...</p>
                 <p className='text-[#828282] max-sm:text-[11px] text-[13px]'>AUG 29, 2023 <span className='text-[#828282]'>45 MINS</span></p>
                 <div className='flex items-center mt-3 gap-2'>
                   <button className='bg-[#d6d6d6] max-sm:w-[20px] max-sm:h-[20px] w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/u.png" /></button>
@@ -48,6 +65,21 @@ const page = () => {
               </div>
             ))
           }
+        </div>
+        <div className="flex gap-2 justify-center mt-6">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`px-4 py-2 cursor-pointer rounded ${
+                page === currentPage
+                  ? 'bg-[#2C2C2C] text-white'
+                  : 'bg-[#AEAEAE] text-[#FFFFFF]'
+              }`}
+            >
+              {page}
+            </button>
+          ))}
         </div>
         <hr className='w-full h-[1px] mt-5 border-0 bg-[#DCDCDC]' />
         <div className='mx-5 mt-10 flex flex-col max-sm:gap-2 gap-5'>
