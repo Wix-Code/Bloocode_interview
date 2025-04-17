@@ -3,32 +3,43 @@ import React, { useState } from 'react'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { exploreCategory, podcasts } from '../dummyData';
 import { usePodcasts } from '../utils/podcastQuerry';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../utils/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortBy, setCategory } from '../slices/podcastFilterSlice';
+import { AppDispatch, RootState } from '../utils/store';
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from 'react-icons/ri';
-import Spinner from '../components/Spinner';
 
-interface Podcasts { 
-  id: number;
-  name: string;
-  img: string;
-  desc: string;
-  part: string;
-}
-
-interface ExploreCategory { 
-  id: number;
-  name: string;
-  img: string;
-}
 const page = () => {
   const [page, setPage] = useState(1);
   const { data: podcasts, isLoading, error, isFetching } = usePodcasts(page);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
+  const { sortBy, category } = useSelector((state :RootState) => state.podcastFilter);
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setCategory(e.target.value));
+  };
+  // ✅ 1. Filter by category
+  const filtered = category
+  ? podcasts?.data?.filter(
+      (podcast) =>
+        podcast.category_type?.toLowerCase() === category.toLowerCase()
+    )
+    : podcasts;
+  
+  console.log(filtered, 'filtered')
+  // ✅ 2. Sort by name or date
+  /*const sorted = [...filtered].sort((a, b) => {
+    if (sortBy === 'name') {
+      return a.name.localeCompare(b.name);
+    }
+    if (sortBy === 'date') {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    }
+    return 0;
+  });*/
+
 
   console.log(podcasts, 'podcast')
 
-  //if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
 
   return (
@@ -39,7 +50,13 @@ const page = () => {
         <div className='flex ml-5 gap-5 max-sm:flex-col max-sm:gap-2'>
           <div className='flex items-center gap-2'>
             <p className='text-[#5A5A5A] text-[16px] font-[700]'>Sort by: <span className='text-[#282828]'>Product</span></p>
-            <HiDotsHorizontal />
+            <div>
+              <select className='border-[1px] p-1 outline-hidden border-[#dddddd]' value={category} onChange={handleCategoryChange}>
+                <option value="BUSINESS">Business</option>
+                <option value="ARTS">Arts</option>
+                <option value="MUSIC">MUSIC</option>
+              </select>
+            </div>
           </div>
           <img className='max-sm:hidden' src="/files/line.png" alt="" />
           <div className='flex items-center gap-2'>
@@ -109,13 +126,12 @@ const page = () => {
           <RiPlayLargeFill />
         </button>
       </div>
-        {isFetching && <p className="text-sm text-gray-500 mt-2">Loading page {page}...</p>}
         <hr className='w-full h-[1px] mt-5 border-0 bg-[#DCDCDC]' />
         <div className='mx-5 mt-10 flex flex-col max-sm:gap-2 gap-5'>
           <h1 className='text-[#5A5A5A] max-sm:text-[18px] text-[24px] font-[800]'>Explore other categories</h1>
           <div className='grid grid-cols-4 gap-5 max-sm:gap-2 max-sm:grid-cols-2'>
             {
-              exploreCategory.map((category: ExploreCategory) => (
+              exploreCategory.map((category) => (
                 <div key={category.id} className='flex relative flex-col gap-1 mb-5'>
                   <img className='w-[100%] h-[160px] object-cover' src={category.img} alt="" />
                   <div className='bg-[#000000] absolute w-full bottom-0'>

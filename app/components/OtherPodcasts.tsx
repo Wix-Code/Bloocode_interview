@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import { usePodcasts } from '../utils/podcastQuerry';
+import Link from 'next/link';
 
 interface Category { 
   id: number;
@@ -30,7 +31,7 @@ const OtherPodcasts = () => {
       <div className='max-w-[1200px] max-sm:mx-5 mx-auto'>
         <div className='flex items-center max-sm:text-[16px] justify-between mb-5 max-sm:mx-0 mx-10'>
           <h1 className='text-[#5A5A5A] font-[700] max-sm:text-[14px] text-[20px] border-l-[3px] border-[#CC0001] pl-1'>Other Podcasts</h1>
-          <button className='px-4 py-2 max-sm:text-[11px] max-sm:p-2 rounded-[30px] text-[#9747FF] text-[15px] font-[500] border-[#9747FF] cursor-pointer border-[1px] flex justify-center items-center gap-1'>View all <IoIosArrowForward /></button>
+          <Link href="/categories"><button className='px-4 py-2 max-sm:text-[11px] max-sm:p-2 rounded-[30px] text-[#9747FF] text-[15px] font-[500] border-[#9747FF] cursor-pointer border-[1px] flex justify-center items-center gap-1'>View all <IoIosArrowForward /></button></Link>
         </div>
         <div className="flex items-start gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 pb-4 hide-scrollbar ">
           {
