@@ -28,7 +28,7 @@ const page = () => {
 
   console.log(podcasts, 'podcast')
 
-  if (isLoading) return <Spinner />;
+  //if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
 
   return (

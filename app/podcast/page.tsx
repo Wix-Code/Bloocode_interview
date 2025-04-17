@@ -27,7 +27,7 @@ const page = () => {
   const startIndex = (currentPage - 1) * podcastsPerPage;
   const currentPodcasts = podcasts?.slice(startIndex, startIndex + podcastsPerPage);*/
 
-  if (isLoading) return <Spinner />;
+  //if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
   //if (!Array.isArray(podcasts)) return <p>No podcasts available.</p>;
   return (
