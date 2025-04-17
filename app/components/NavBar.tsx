@@ -9,8 +9,8 @@ import ResponsiveNavbar from './ResponsiveNavbar'
 const NavBar = () => {
   const[openNav, setOpenNav] = useState<boolean>(false)
   return (
-    <div className='bg-[#FFFFFF] sticky z-50 top-0'>
-      <div style={{boxShadow: "rgba(17, 17, 26, 0.1) 0px 0px 16px"}} className='max-w-[1200px] max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
+    <div style={{boxShadow: "rgba(17, 17, 26, 0.1) 0px 0px 16px"}} className='bg-[#FFFFFF] sticky z-50 top-0'>
+      <div className='max-w-[1200px] max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
         <img className='w-[150px] max-md:w-[90px] object-cover ml-5' src="/files/afr.png" alt="" />
         <div className='flex items-center mr-5 max-lg:hidden gap-4'>
           {

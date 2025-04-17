@@ -1,7 +1,7 @@
 // lib/hooks/usePodcasts.ts
 "use client"
 import { useQuery } from '@tanstack/react-query';
-import { Podcast, PodcastData } from './interfaces';
+import { Category, Podcast, PodcastData } from './interfaces';
 import page from '../page';
 
 interface APIResponse {
@@ -97,5 +97,19 @@ export const useSinglePodcast = (id: number | string) => {
     queryKey: ['podcast', id],
     queryFn: () => fetchPodcastById(id),
     enabled: !!id, // only run when id is available
+  });
+};
+
+const fetchPodcastOtherCategories = async (): Promise<Category[]> => {
+  const res = await fetch('https://api.wokpa.app/api/listeners/top-categories');
+  if (!res.ok) throw new Error('Failed to fetch podcast categories');
+  const response = await res.json();
+  return response.data; // Assuming { message: 'success', data: {...} }
+};
+
+export const useFetchPodcastOtherCategories = () => {
+  return useQuery<Category[]>({
+    queryKey: ['podcast-categories'],
+    queryFn: fetchPodcastOtherCategories,
   });
 };

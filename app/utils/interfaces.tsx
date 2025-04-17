@@ -15,3 +15,9 @@ export interface PodcastData {
   category_type: string;
   audioUrl?: string;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  image_url: string;
+};
