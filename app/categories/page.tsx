@@ -105,35 +105,35 @@ const page = () => {
         >
           <RiPlayReverseLargeFill />
         </button>
-
         {Array.from({ length: podcasts?.last_page || 1 }, (_, i) => i + 1)
-        .filter((pg) => {
-          return (
-            pg === 1 || // always show first
-            pg === podcasts?.last_page || // always show last
-            (pg >= page - 2 && pg <= page + 2) // show window around current page
-          );
-        })
-        .map((pg, index, arr) => {
-          const prevPage = arr[index - 1];
-          const isEllipsisNeeded = prevPage && pg - prevPage > 1;
-
-          return (
-            <React.Fragment key={pg}>
-              {isEllipsisNeeded && (
-                <span className="px-2 text-[16px] text-[#AEAEAE] flex items-center  justify-center select-none"><HiDotsHorizontal /></span>
-              )}
-              <button
-                onClick={() => setPage(pg)}
-                className={`px-3 font-[500] text-[13px] w-[30px] cursor-pointer justify-center items-center flex h-[30px] rounded ${
-                  pg === page ? 'bg-[#2C2C2C] text-[#FFFFFF]' : 'bg-[#AEAEAE]'
-                }`}
-              >
-                {pg}
-              </button>
-            </React.Fragment>
-          );
-        })}
+          .filter((pg) => {
+            const lastPage = podcasts?.last_page || 1;
+            // Always show 1 and last page
+            if (pg === 1 || pg === lastPage) return true;
+            // Show up to 3 pages near the current one
+            return Math.abs(pg - page) <= 1;
+          })
+          .map((pg, index, arr) => {
+            const prevPage = arr[index - 1];
+            const isEllipsisNeeded = prevPage && pg - prevPage > 1;
+            return (
+              <React.Fragment key={pg}>
+                {isEllipsisNeeded && (
+                  <span className="px-2 text-[16px] text-[#AEAEAE] flex items-center justify-center select-none">
+                    <HiDotsHorizontal />
+                  </span>
+                )}
+                <button
+                  onClick={() => setPage(pg)}
+                  className={`px-3 font-[500] text-[13px] w-[30px] h-[30px] rounded flex justify-center items-center cursor-pointer ${
+                    pg === page ? 'bg-[#2C2C2C] text-white' : 'bg-[#AEAEAE]'
+                  }`}
+                >
+                  {pg}
+                </button>
+              </React.Fragment>
+            );
+          })}
         <button
           disabled={page === podcasts?.last_page}
           onClick={() => setPage((prev) => prev + 1)}
