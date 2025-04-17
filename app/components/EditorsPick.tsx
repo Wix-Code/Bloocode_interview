@@ -3,7 +3,7 @@ import React from 'react'
 const EditorsPick = () => {
   return (
     <div className='bg-[#F6F6F6] pb-5 mt-8'>
-      <div className='max-w-[1200px] max-sm:mx-5 mx-auto flex flex-col gap-2'>
+      <div className='max-w-[1200px] max-xl:mx-5 mx-auto flex flex-col gap-2'>
         <p className='text-[24px] max-sm:text-[15px] mb-2 mt-5 text-[#282828] font-[700]'>EDITOR’S PICKS</p>
         <h1 className='text-[#5A5A5A] font-[700] max-sm:text-[14px] text-[20px] border-l-[3px] border-[#CC0001] pl-1'>Featured Episodes</h1>
         <div className='flex h-[550px] max-sm:h-[100%] max-sm:flex-col items-center gap-8 mt-5'>

@@ -117,7 +117,7 @@ const page = () => {
           </div>
         </div>
         <div className='w-[20%] max-sm:mt-10 max-sm:w-full'>
-          <div className='flex flex-col max-lg:mr-5 max-md:mx-10'>
+          <div className='flex flex-col max-xl:mr-5 max-md:mx-10'>
             <p className='text-[11px] text-right text-[#5A5A5A] font-[500]'>ADVERTISEMENT</p>
             <img className='w-[100%] object-cover h-[100%]' src="/files/adv.png" alt="" />
             <img className='w-[100%] object-center mt-5 h-[100%]' src="/files/av.png" alt="" />

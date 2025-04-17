@@ -82,7 +82,7 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className='grid max-lg:grid-cols-3 max-md:grid-cols-3 mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-2'>
+        <div className='grid max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-3 mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-2'>
           {
             filtered?.map((podcast) => (
               <div key={podcast.id} className='flex flex-col max-sm:gap-[2px] gap-1'>

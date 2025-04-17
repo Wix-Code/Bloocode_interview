@@ -10,7 +10,7 @@ const NavBar = () => {
   const[openNav, setOpenNav] = useState<boolean>(false)
   return (
     <div className='bg-[#FFFFFF] sticky z-50 top-0'>
-      <div className='max-w-[1200px] max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
+      <div className='max-w-[1200px] max-xl:mx-5 max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
         <img className='w-[150px] max-md:w-[90px] object-cover ml-5' src="/files/afr.png" alt="" />
         <div className='flex items-center max-lg:hidden gap-4'>
           {
@@ -29,8 +29,8 @@ const NavBar = () => {
         <button onClick={() => setOpenNav(!openNav)} className='max-lg:flex text-[18px] hidden mr-5'><FaBars /></button>
       </div>
       <div className='py-2 flex w-[100%] max-lg:hidden items-center'>
-        <img className='w-[40%] h-[60px]' src="/files/ba.png" alt="" />
-        <div className='flex w-[60%] bg-[#1B1B1B] gap-8 justify-center items-center h-[60px]'>
+        <img className='w-[40%] max-xl:w-[25%] object-cover h-[60px]' src="/files/ba.png" alt="" />
+        <div className='flex w-[60%] max-xl:w-[75%] bg-[#1B1B1B] gap-8 max-xl:text-[13px] justify-center pr-5 items-center h-[60px]'>
           <div className='flex text-[#FFFFFF] bg-[#1B1B1B] items-center gap-2'>
             <img src="/files/la.png" alt="" />
             <p className='text-[15px] font-[700]'>Latest News</p>

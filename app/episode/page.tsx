@@ -23,14 +23,14 @@ const page = () => {
   return (
     <div className='mb-20'>
       <div className='bg-[#2B3221] py-10'>
-        <div className='max-w-[1200px] max-sm:mx-5 mx-auto max-sm:pr-0 pr-14 flex flex-col gap-4'>
+        <div className='max-w-[1200px] max-xl:mx-5 mx-auto max-lg:pr-0 pr-14 flex flex-col gap-4'>
           <Link href="/podcast"><p className='text-[13px] flex items-center gap-1 text-[#FFFFFF] font-[600]'><IoIosArrowBack /> Back to podcast</p></Link>
-          <div className='flex gap-5 max-sm:flex-col'>
-            <img className='w-[157px] max-sm:h-[320px] max-sm:w-full object-cover h-[129px]' src="/files/epi.png" alt="" />
+          <div className='flex gap-5 max-lg:flex-col'>
+            <img className='w-[157px] max-lg:h-[350px] max-sm:h-[320px] max-lg:w-full object-cover h-[129px]' src="/files/epi.png" alt="" />
             <div className='flex w-full flex-col pr-5 gap-4'>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>The Funeral Experience – the Good, the Bad, and the Ugly</p>
               <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>The struggles of a widow begin immediately when her husband dies; she is immediately made to go through various traditional rites, disregarding her pain and process of grieving.Most people in Africa, argue that those rituals are intended to protect widows and not to harm them. This doesn’t appear to be the case as some of these practices and beliefs tend to dehumanise the very essence of their womanhood.In this episode, we will talk about these rites and possible solutions to the bad sides and even how to manage the ugly sides.The guest on this episode is Ms Grace Udodong. <span className='text-[#BCFFB6] text-[15px] font-[700]'>READ MORE </span></p>
-              <audio className='w-full mt-6' autoPlay controls>
+              <audio className='w-full mt-6' controls>
                 <source src="https://dts.podtrac.com/redirect.mp3/api.spreaker.com/download/episode/41885154/https_d3ctxlq1ktw2nl_cloudfront_net_staging_2020_02_16_150e8d39c1b7e09317d2a227513505f6.mp3" />
               </audio>
               <div className='flex w-full justify-space-between my-6 items-center'>
@@ -49,9 +49,9 @@ const page = () => {
         </div>
       </div>
       <div className='max-w-[1200px] mx-auto mt-5 flex flex-col gap-4'>
-        <h1 className='text-[14px] max-sm:px-5 mx-5 font-[800] text-[#282828]'>NEXT EPISODES IN QUEUE</h1>
+        <h1 className='text-[14px] max-lg:px-5 max-xl:px-5 mx-5 font-[800] text-[#282828]'>NEXT EPISODES IN QUEUE</h1>
         <hr className='border-0 w-full h-[1px] bg-[#DCDCDC]' />
-        <div className='flex max-sm:px-5 max-sm:mx-5 items-center gap-8 max-sm:flex-col mx-5 mb-10'>
+        <div className='flex max-lg:px-5 max-lg:grid-cols-2 max-xl:px-5 max-sm:mx-5 items-center gap-8 max-sm:flex-col mx-5 mb-10'>
           {
             podcasts.slice(0, 3).map((podcast) => (
               <div key={podcast.id} className='flex w-[300px] max-sm:mx-5 max-sm:w-full flex-col gap-4' style={{boxShadow: " rgba(0, 0, 0, 0.04) 0px 3px 5px"}}>

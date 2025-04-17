@@ -6,8 +6,8 @@ const TrendingThisWeek = () => {
   const [page, setPage] = useState(1);
   const { data: podcasts, isLoading, error, isFetching } = usePodcasts(page);
   return (
-    <div>
-      <div className='max-w-[1200px] max-sm:mx-5 mx-auto mt-5'>
+    <div className=''>
+      <div className='max-w-[1200px] max-xl:mx-5 mx-auto mt-5'>
         <p className='text-[24px] max-sm:text-[15px] mb-3 mt-5 text-[#282828] font-[700]'>Trending this week</p>
         <h1 className='text-[#5A5A5A] font-[700] max-sm:text-[14px] text-[20px] border-l-[3px] border-[#CC0001] pl-1'>Educational</h1>
         <div  className="flex items-start mt-5 gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 pb-4 hide-scrollbar">

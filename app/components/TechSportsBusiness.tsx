@@ -30,7 +30,7 @@ const OtherPodcasts = () => {
   };
   return (
     <div className='mt-10'>
-      <div className='max-w-[1200px] max-sm:mx-5 mx-auto'>
+      <div className='max-w-[1200px] max-xl:mx-5 mx-auto'>
         <div className='flex items-center max-sm:text-[16px] justify-between mb-5 max-sm:mx-0 mx-10'>
           <h1 className='text-[#5A5A5A] font-[700] max-sm:text-[14px] text-[20px] border-l-[3px] border-[#CC0001] pl-1'>Tech, Sport & Business</h1>
           <Link href='/categories'><button className='px-4 py-2 max-sm:text-[11px] max-sm:p-2 rounded-[30px] text-[#9747FF] text-[15px] font-[500] border-[#9747FF] cursor-pointer border-[1px] flex justify-center items-center gap-1'>View all <IoIosArrowForward /></button></Link>
