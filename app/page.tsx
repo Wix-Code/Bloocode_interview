@@ -9,11 +9,13 @@ import EntertainmentLifeStyle from './components/EntertainmentLifeStyle'
 import NewlyAddedEpisodes from './components/NewlyAddedEpisodes'
 import NewsStoryTelling from './components/NewsStoryTelling'
 import TrendingThisWeek from './components/TrendingThisWeek'
+import EditorsPick from './components/EditorsPick'
 
 const page = () => {
   return (
     <div>
       <Adds />
+      <EditorsPick />
       <TrendingThisWeek />
       <NewlyAddedEpisodes />
       <NewsStoryTelling />

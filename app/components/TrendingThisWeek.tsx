@@ -13,8 +13,9 @@ const TrendingThisWeek = () => {
               return (
                 <div key={podcast.id} className="snap-start relative max-sm:w-[180px] max-sm:gap-1 cursor-pointer shrink-0 w-[280px] flex flex-col gap-3">
                   <img className='w-[100%] object-cover max-sm:h-[300px] h-[400px]' src={podcast.img} alt="" />
-                  <div className='flex absolute justify-center items-center py-3 bottom-0 left-0 w-[100%] bg-[#000000d7]'>
-                    <p className='text-[20px] text-center max-sm:text-[16px] font-[700] text-[#ffffff]'>More Episodes</p>
+                  <div className='flex flex-col gap-1 absolute justify-center items-center py-3 bottom-0 left-0 w-[100%] bg-[#000000d7]'>
+                    <p className='text-[#FFFFFF] max-sm:text-[11px] text-[13px] font-[700]'>12 Episodes</p>
+                    <p className='text-[20px] text-center max-sm:text-[14px] font-[700] text-[#ffffff]'>More Episodes</p>
                   </div>
                 </div>
               )
