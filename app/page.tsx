@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 import GlobalPartners from './components/GlobalPartners'
 import Banner from './components/Banner'
 import TechSportsBusiness from './components/TechSportsBusiness'
@@ -10,8 +12,15 @@ import NewlyAddedEpisodes from './components/NewlyAddedEpisodes'
 import NewsStoryTelling from './components/NewsStoryTelling'
 import TrendingThisWeek from './components/TrendingThisWeek'
 import EditorsPick from './components/EditorsPick'
+import { usePodcastData } from './utils/podcastQuerry'
+import Spinner from './components/Spinner'
 
 const page = () => {
+  const [page, setPage] = useState(1);
+  const { data: podcasts, isLoading, error } = usePodcastData(page);
+
+  if (isLoading) return <Spinner />;
+
   return (
     <div>
       <Adds />

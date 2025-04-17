@@ -25,17 +25,12 @@ const page = () => {
   const [page, setPage] = useState(1);
   const { data: podcasts, isLoading, error, isFetching } = usePodcasts(page);
   const dispatch = useDispatch<AppDispatch>();
-  /*const [currentPage, setCurrentPage] = useState(1);
-  const podcastsPerPage = 8; 
-  const totalPages = Math.ceil((podcasts?.length || 0) / podcastsPerPage);
-  const startIndex = (currentPage - 1) * podcastsPerPage;
-  const currentPodcasts = podcasts?.slice(startIndex, startIndex + podcastsPerPage);*/
 
   console.log(podcasts, 'podcast')
 
   if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
- // if (!Array.isArray(podcasts)) return <p>No podcasts available.</p>;
+
   return (
     <div className='mt-5 mb-32'>
       <div className='flex flex-col gap-4 max-w-[1200px] mx-auto'>

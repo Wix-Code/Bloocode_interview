@@ -4,6 +4,8 @@ import "./globals.css";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import ClientProvider from "./utils/ClientProvider";
+import Spinner from "./components/Spinner";
+import SplashLoader from "./components/SplashLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,9 +40,11 @@ export default function RootLayout({
         className={`${montserrat.className} antialiased`}
       >
         <ClientProvider>
-          <NavBar />
-          {children}
-          <Footer />
+          <SplashLoader>
+              <NavBar />
+              {children}
+              <Footer />
+          </SplashLoader>
         </ClientProvider>
       </body>
     </html>

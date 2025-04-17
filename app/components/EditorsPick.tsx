@@ -14,23 +14,23 @@ const EditorsPick = () => {
               <p className='text-[24px] max-sm:text-[16px] text-[#FFFFFF] cursor-pointer font-[800]'>Bridging the Financing Gap in Nigeria’s off-grid sector</p>
             </div>
           </div>
-          <div className='h-full flex flex-col gap-1 max-sm:w-[100%] w-[50%]'>
-            <div className='flex max-sm:gap-5 gap-9 max-sm:h-[300px] h-[450px]'>
+          <div className='h-full flex flex-col gap-1 max-sm:w-full w-[50%]'>
+            <div className='flex max-sm:gap-5 max-sm:w-full gap-9 shrink max-sm:h-[100%] h-[450px]'>
               <div className='bg-[#FFFFFF] w-full flex flex-col gap-4'>
                 <img className='object-cover max-sm:h-[150px] h-[250px] w-full' src="/files/epi.png" alt="" />
-                <div className='flex items-center relative gap-1  mx-10'>
+                <div className='flex items-center relative gap-1 max-sm:mx-5  mx-10'>
                   <div>
-                    <img className='absolute w-[40px] h-[40px] rounded-[50%] object-cover left-[-59px] top-0' src="/files/u.png" alt="" />
+                    <img className='absolute max-sm:w-[25px] max-sm:h-[25px] max-sm:left-[-30] w-[40px] h-[40px] rounded-[50%] object-cover left-[-59px] top-0' src="/files/u.png" alt="" />
                   </div>
                   <h1 className='text-[18px] max-sm:text-[14px] font-[600] text-[#282828]'>The Future of Work: Embracing Remote and Hybrid Workforces</h1>
                 </div>
                 <p className='text-[13px] ml-11 font-normal text-left mb-5 text-[#282828]'>Aug 7, 2025</p>
               </div>
-              <div className='bg-[#FFFFFF] pr-5 w-[100%] flex flex-col gap-4'>
+              <div className='bg-[#FFFFFF] max-sm:pr-0 pr-5 w-[100%] flex flex-col gap-4'>
                 <img className='object-cover max-sm:h-[150px] h-[250px] w-full' src="/files/ad.png" alt="" />
-                <div className='flex items-center relative gap-1  mx-10'>
+                <div className='flex items-center relative gap-1 max-sm:mx-5  mx-10'>
                   <div>
-                    <img className='absolute w-[40px] h-[40px] rounded-[50%] object-cover left-[-59px] top-0' src="/files/u.png" alt="" />
+                    <img className='absolute max-sm:w-[25px] max-sm:h-[25px] w-[40px] h-[40px] rounded-[50%] object-cover left-[-59px] max-sm:left-[-30] top-0' src="/files/u.png" alt="" />
                   </div>
                   <h1 className='text-[18px] font-[600] max-sm:text-[14px] text-[#282828]'>Compatibility in Relationship</h1>
                 </div>
