@@ -9,7 +9,7 @@ export default function SplashLoader({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     // simulate delay or wait for something like data/auth/init
-    const timeout = setTimeout(() => setIsLoading(false), 2500); // 1.5s loading
+    const timeout = setTimeout(() => setIsLoading(false), 500); // 1.5s loading
     return () => clearTimeout(timeout);
   }, []);
 

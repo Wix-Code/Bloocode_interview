@@ -22,10 +22,14 @@ const page = () => {
   ? podcasts?.data?.filter(
       (podcast) =>
         podcast.category_type?.toLowerCase() === category.toLowerCase()
-    )
-    : podcasts;
-  
+    ) ?? []
+  : podcasts?.data ?? [];
   console.log(filtered, 'filtered')
+  const itemsPerPage = 15;
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+
+    // Slice data for current page
+    const currentData = filtered.slice((page - 1) * itemsPerPage, page * itemsPerPage);
   // ✅ 2. Sort by name or date
   /*const sorted = [...filtered].sort((a, b) => {
     if (sortBy === 'name') {
@@ -48,25 +52,39 @@ const page = () => {
         <h1 className='text-[28px] ml-5 text-[#5A5A5A] font-[800] max-sm:text-[20px]'>ALL PODCASTS</h1>
         <hr className='w-full h-[1px] border-0 bg-[#DCDCDC]' />
         <div className='flex ml-5 gap-5 max-sm:flex-col max-sm:gap-2'>
-          <div className='flex items-center gap-2'>
-            <p className='text-[#5A5A5A] text-[16px] font-[700]'>Sort by: <span className='text-[#282828]'>Product</span></p>
+          <div className='flex max-sm:flex-col max-md:items-start items-center gap-2'>
+            <p className='text-[#5A5A5A] text-[16px] font-[700]'>Sort by:</p>
             <div>
               <select className='border-[1px] p-1 outline-hidden border-[#dddddd]' value={category} onChange={handleCategoryChange}>
+                <option value="">All Categories</option>
                 <option value="BUSINESS">Business</option>
                 <option value="ARTS">Arts</option>
-                <option value="MUSIC">MUSIC</option>
+                <option value="NEWS">News</option>
+                <option value="MUSIC">Music</option>
+                <option value="SOCIETY & CULTURE">Society & Culture</option>
+                <option value="KIDS & FAMILY">Kids & Family</option>
               </select>
             </div>
           </div>
           <img className='max-sm:hidden' src="/files/line.png" alt="" />
-          <div className='flex items-center gap-2'>
-            <p className='text-[#5A5A5A] text-[16px] font-[700]'>Sort by category: <span className='text-[#282828]'>All</span></p>
-            <HiDotsHorizontal />
+          <div className='flex items-center max-sm:items-start max-sm:flex-col gap-2'>
+            <p className='text-[#5A5A5A] text-[16px] font-[700]'>Sort by category:</p>
+            <div>
+              <select className='border-[1px] p-1 outline-hidden border-[#dddddd]' value={category} onChange={handleCategoryChange}>
+                <option value="">All Categories</option>
+                <option value="BUSINESS">Business</option>
+                <option value="ARTS">Arts</option>
+                <option value="NEWS">News</option>
+                <option value="MUSIC">Music</option>
+                <option value="SOCIETY & CULTURE">Society & Culture</option>
+                <option value="KIDS & FAMILY">Kids & Family</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div className='grid mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-2'>
+        <div className='grid max-lg:grid-cols-3 max-md:grid-cols-3 mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-2'>
           {
-            podcasts?.data?.map((podcast) => (
+            filtered?.map((podcast) => (
               <div key={podcast.id} className='flex flex-col max-sm:gap-[2px] gap-1'>
                 <img className='w-[100%] h-[180px] object-cover' src={podcast.picture_url} alt="" />
                 <h1 className='text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]'>{podcast.title.slice(0, 15)}...</h1>
@@ -129,7 +147,7 @@ const page = () => {
         <hr className='w-full h-[1px] mt-5 border-0 bg-[#DCDCDC]' />
         <div className='mx-5 mt-10 flex flex-col max-sm:gap-2 gap-5'>
           <h1 className='text-[#5A5A5A] max-sm:text-[18px] text-[24px] font-[800]'>Explore other categories</h1>
-          <div className='grid grid-cols-4 gap-5 max-sm:gap-2 max-sm:grid-cols-2'>
+          <div className='grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-3 gap-5 max-sm:gap-2 max-sm:grid-cols-2'>
             {
               exploreCategory.map((category) => (
                 <div key={category.id} className='flex relative flex-col gap-1 mb-5'>
