@@ -10,9 +10,9 @@ const NavBar = () => {
   const[openNav, setOpenNav] = useState<boolean>(false)
   return (
     <div className='bg-[#FFFFFF] sticky z-50 top-0'>
-      <div className='max-w-[1200px] max-xl:mx-5 max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
+      <div className='max-w-[1200px] max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
         <img className='w-[150px] max-md:w-[90px] object-cover ml-5' src="/files/afr.png" alt="" />
-        <div className='flex items-center max-lg:hidden gap-4'>
+        <div className='flex items-center mr-5 max-lg:hidden gap-4'>
           {
             Links.map((link) => (
               <a href={link.url} key={link.id} className='text-[#282828] text-[15px] font-[700] capitalize hover:text-[#636363] pr-4'>{link.name}</a>

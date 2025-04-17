@@ -17,6 +17,9 @@ const page = () => {
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setCategory(e.target.value));
   };
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setSortBy(e.target.value as 'name' | 'date'));
+  };
   // ✅ 1. Filter by category
   const filtered = category
   ? podcasts?.data?.filter(
@@ -31,15 +34,15 @@ const page = () => {
     // Slice data for current page
     const currentData = filtered.slice((page - 1) * itemsPerPage, page * itemsPerPage);
   // ✅ 2. Sort by name or date
-  /*const sorted = [...filtered].sort((a, b) => {
+  const sorted = [...filtered].sort((a, b) => {
     if (sortBy === 'name') {
-      return a.name.localeCompare(b.name);
+      return a.title.localeCompare(b.title);
     }
     if (sortBy === 'date') {
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      return new Date(b.category_type).getTime() - new Date(a.category_type).getTime();
     }
     return 0;
-  });*/
+  });
 
 
   console.log(podcasts, 'podcast')
@@ -55,14 +58,9 @@ const page = () => {
           <div className='flex max-sm:flex-col max-md:items-start items-center gap-2'>
             <p className='text-[#5A5A5A] text-[16px] font-[700]'>Sort by:</p>
             <div>
-              <select className='border-[1px] p-1 outline-hidden border-[#dddddd]' value={category} onChange={handleCategoryChange}>
-                <option value="">All Categories</option>
-                <option value="BUSINESS">Business</option>
-                <option value="ARTS">Arts</option>
-                <option value="NEWS">News</option>
-                <option value="MUSIC">Music</option>
-                <option value="SOCIETY & CULTURE">Society & Culture</option>
-                <option value="KIDS & FAMILY">Kids & Family</option>
+              <select className='border-[1px] p-1 outline-hidden border-[#dddddd]' value={sortBy} onChange={handleSortChange}>
+                <option value="">All</option>
+                <option value="name">Title</option>
               </select>
             </div>
           </div>
@@ -84,7 +82,7 @@ const page = () => {
         </div>
         <div className='grid max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-3 mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-2'>
           {
-            filtered?.map((podcast) => (
+            sorted?.map((podcast) => (
               <div key={podcast.id} className='flex flex-col max-sm:gap-[2px] gap-1'>
                 <img className='w-[100%] h-[180px] object-cover' src={podcast.picture_url} alt="" />
                 <h1 className='text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]'>{podcast.title.slice(0, 15)}...</h1>
