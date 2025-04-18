@@ -18,11 +18,11 @@ const Footer = () => {
         <div className='flex items-center max-md:items-start max-md:gap-8 gap-5 max-md:flex-col'>
           {
             Links.map((link: Link) => (
-              <a href={link.url} key={link.id} className={`text-[#C9C9C9] max-md:text-[14px] text-[16px] font-[700] uppercase hover:text-[#ececec] max-md:border-0 border-r-[1px] pr-4 border-[#C9C9C9] ${pathname === link.url ? 'text-[#ffffff]' : ""}`}>{link.name}</a>
+              <a href={link.url} key={link.id} className={`text-[#C9C9C9] max-lg:text-[13px] text-[16px] font-[700] uppercase hover:text-[#ececec] max-md:border-0 border-r-[1px] pr-4 border-[#C9C9C9] ${pathname === link.url ? 'text-[#ffffff]' : ""}`}>{link.name}</a>
             ))
           }
           <div className='flex items-center max-md:gap-8 max-md:items-start max-md:flex-col gap-2'>
-            <p  className='text-[#C9C9C9] max-md:text-[14px] text-[16px] font-[700] uppercase hover:text-[#1DB954]'>CONNECT WITH ABR</p>
+            <p  className='text-[#C9C9C9] max-md:text-[13px] text-[16px] font-[700] uppercase hover:text-[#1DB954]'>CONNECT WITH ABR</p>
             <img src="/files/ic.png" alt="" />
           </div>
         </div>
