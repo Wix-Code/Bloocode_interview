@@ -22,7 +22,7 @@ const NavBar = () => {
           {
             Links.map((link) => (
               <a href={link.url} key={link.id}  className={`text-[#282828] text-[15px] font-[700] capitalize hover:text-[#636363] pr-4 ${
-                pathname === link.url ? 'text-[#838383] underline' : ''
+                pathname === link.url ? 'text-[#838383]' : ''
               }`}>{link.name}</a>
             ))
           }
