@@ -5,9 +5,14 @@ import { Links } from '../dummyData'
 import { CiSearch } from 'react-icons/ci'
 import { FaBars } from 'react-icons/fa'
 import ResponsiveNavbar from './ResponsiveNavbar'
+import { usePathname } from 'next/navigation'
 
 const NavBar = () => {
-  const[openNav, setOpenNav] = useState<boolean>(false)
+  const [openNav, setOpenNav] = useState<boolean>(false)
+  
+  const pathname = usePathname()
+  console.log(pathname)
+  
   return (
     <div style={{boxShadow: "rgba(17, 17, 26, 0.1) 0px 0px 16px"}} className='bg-[#FFFFFF] sticky z-50 top-0'>
       <div className='max-w-[1200px] max-lg:relative mx-auto flex items-center h-[80px] justify-between py-5'>
@@ -15,7 +20,9 @@ const NavBar = () => {
         <div className='flex items-center mr-5 max-lg:hidden gap-4'>
           {
             Links.map((link) => (
-              <a href={link.url} key={link.id} className='text-[#282828] text-[15px] font-[700] capitalize hover:text-[#636363] pr-4'>{link.name}</a>
+              <a href={link.url} key={link.id}  className={`text-[#282828] text-[15px] font-[700] capitalize hover:text-[#636363] pr-4 ${
+                pathname === link.url ? 'text-[#838383] underline' : ''
+              }`}>{link.name}</a>
             ))
           }
           <div className='flex items-center gap-2 ml-5 bg-[#00000052] text-[#FFFFFF] rounded-[28px] px-4 text-[13px] py-3'>
@@ -24,7 +31,7 @@ const NavBar = () => {
           </div>
         </div>
         <div className='hidden max-lg:flex'>
-          {openNav && (<ResponsiveNavbar setOpenNav={setOpenNav} />)}
+          {openNav && (<ResponsiveNavbar pathname={pathname} setOpenNav={setOpenNav} />)}
         </div>
         <button onClick={() => setOpenNav(!openNav)} className='max-lg:flex text-[18px] hidden mr-5'><FaBars /></button>
       </div>

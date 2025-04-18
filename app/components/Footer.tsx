@@ -1,5 +1,7 @@
+"use client"
 import React from 'react'
 import { Links } from '../dummyData'
+import { usePathname } from 'next/navigation';
 
 interface Link {
   id: number;
@@ -8,6 +10,7 @@ interface Link {
 }
 
 const Footer = () => {
+  const pathname = usePathname()
   return (
     <div className='bg-[#282828] max-lg:py-10 py-8 max-md:py-10'>
       <div className='max-w-[1200px] mx-auto max-xl:mx-5 flex max-md:gap-10 max-md:mx-5 flex-col gap-5'>
@@ -15,7 +18,7 @@ const Footer = () => {
         <div className='flex items-center max-md:items-start max-md:gap-8 gap-5 max-md:flex-col'>
           {
             Links.map((link: Link) => (
-              <a href={link.url} key={link.id} className='text-[#C9C9C9] max-md:text-[14px] text-[16px] font-[700] uppercase hover:text-[#ececec] max-md:border-0 border-r-[1px] pr-4 border-[#C9C9C9]'>{link.name}</a>
+              <a href={link.url} key={link.id} className={`text-[#C9C9C9] max-md:text-[14px] text-[16px] font-[700] uppercase hover:text-[#ececec] max-md:border-0 border-r-[1px] pr-4 border-[#C9C9C9] ${pathname === link.url ? 'text-[#ffffff]' : ""}`}>{link.name}</a>
             ))
           }
           <div className='flex items-center max-md:gap-8 max-md:items-start max-md:flex-col gap-2'>

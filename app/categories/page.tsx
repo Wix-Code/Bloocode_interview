@@ -7,6 +7,7 @@ import { setSortBy, setCategory } from "../slices/podcastFilterSlice";
 import { AppDispatch, RootState } from "../utils/store";
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from "react-icons/ri";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const Page = () => {
   const router = useRouter();
@@ -111,7 +112,7 @@ const Page = () => {
         {/* Podcast Cards */}
         <div className="grid max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-3 mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-3">
           {paginatedData.map((podcast) => (
-            <div key={podcast.id} className="flex flex-col max-sm:gap-[2px] gap-1">
+            <Link href={`/categories/${podcast.id}`}><div key={podcast.id} className="flex flex-col max-sm:gap-[2px] gap-1">
               <img className="w-[100%] h-[180px] object-cover" src={podcast.picture_url} alt="" />
               <h1 className="text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]">
                 {podcast.title.slice(0, 15)}...
@@ -133,7 +134,7 @@ const Page = () => {
                   <img src="/files/gr.png" />
                 </button>
               </div>
-            </div>
+            </div></Link>
           ))}
         </div>
 

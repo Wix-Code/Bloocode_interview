@@ -8,6 +8,7 @@ import { usePodcastData } from '../utils/podcastQuerry';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from 'react-icons/ri';
 import Spinner from '../components/Spinner';
+import Link from 'next/link';
 
 interface Podcasts { 
   id: number;
@@ -57,8 +58,8 @@ const page = () => {
                   <img className='w-[157px] max-sm:h-[250px] h-[129px] max-sm:w-full object-cover' src={category.picture_url} alt="" />
                   <div className='max-sm:w-full'>
                     <p className='text-[#828282] text-[13px] font-[700]'>AUG 29, 2023 <span className='text-[#828282]'>45 MINS</span></p>
-                    <p className='text-[#282828] text-[20px] font-[700]'>{category.title}</p>
-                    <p className='text-[#282828] text-[15px] font-[500]'>{category.description.slice(0, 350)}...</p>
+                    <p className='text-[#282828]  text-[20px] font-[700]'>{category.title}</p>
+                    <Link href={`/podcast/${category.id}`}><p className='text-[#282828] hover:text-[#0f0f0f] text-[15px] font-[500]'>{category.description.slice(0, 350)}...</p></Link>
                     <div className='flex items-center mt-3 gap-4'>
                       <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/u.png" /></button>
                       <button className='bg-[#d6d6d6] cursor-pointer w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/b.png" /></button>
