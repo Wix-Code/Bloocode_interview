@@ -2,6 +2,7 @@
 import React from 'react'
 import { Links } from '../dummyData'
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 interface Link {
   id: number;
@@ -14,7 +15,7 @@ const Footer = () => {
   return (
     <div className='bg-[#282828] max-lg:py-10 py-8 max-md:py-10'>
       <div className='max-w-[1200px] mx-auto max-xl:mx-5 flex max-md:gap-10 max-md:mx-5 flex-col gap-5'>
-        <img className='w-[150]' src="/files/footh.png" alt="" />
+        <Link href="/"><img className='w-[150]' src="/files/footh.png" alt="" /></Link>
         <div className='flex items-center max-md:items-start max-md:gap-8 gap-5 max-md:flex-col'>
           {
             Links.map((link: Link) => (
