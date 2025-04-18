@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import ClientProvider from "./utils/ClientProvider";
 import Spinner from "./components/Spinner";
 import SplashLoader from "./components/SplashLoader";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,9 +41,11 @@ export default function RootLayout({
         className={`${montserrat.className} antialiased`}
       >
         <ClientProvider>
+          <Suspense fallback={<Spinner />}>
             <NavBar />
             {children}
             <Footer />
+          </Suspense>
         </ClientProvider>
       </body>
     </html>
