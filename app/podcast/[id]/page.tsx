@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowBack } from 'react-icons/io'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -14,14 +14,19 @@ const page = () => {
   const podcastId = typeof id === 'string' ? id : '';
 
   const { data: podcast, isLoading, isError } = useFetchPodcastDataById(podcastId);
-  console.log(podcastId, 'podcast id')
-  console.log(podcast, 'podcast data')
+  
+  const [isExpanded, setIsExpanded] = useState(false); // ✅ Move to top
 
-  //if (!podcastId) return <p>Loading...</p>;
   if (isLoading) return <p>Loading podcast...</p>;
   if (isError) return <p>Something went wrong</p>;
-  console.log(podcast, 'podcast single')
+  
+  const words = podcast?.description?.split(' ') || []; // ✅ Fallback to empty array
+  const isLong = words.length > 100;
+  const shortText = words.slice(0, 100).join(' ') + '...';
+  
+  const toggleExpand = () => setIsExpanded(!isExpanded);
 
+  console.log(podcast, 'podcast single')
   return (
     <div className='mb-20'>
       <div className='bg-[#2B3221] py-10'>
@@ -31,7 +36,15 @@ const page = () => {
             <img className='w-[157px] max-lg:h-[350px] max-sm:h-[320px] max-lg:w-full object-cover h-[129px]' src={podcast?.picture_url} alt="" />
             <div className='flex w-full flex-col pr-5 gap-4'>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>{podcast?.title}</p>
-              <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{podcast?.description} <span className='text-[#BCFFB6] text-[15px] font-[700]'>READ MORE </span></p>
+              <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{isExpanded || !isLong ? podcast?.description : shortText}{' '}
+      {isLong && (
+        <span
+          onClick={toggleExpand}
+          className='text-[#BCFFB6] text-[15px] font-[700] cursor-pointer'
+        >
+          {isExpanded ? 'READ LESS' : 'READ MORE'}
+        </span>
+      )}</p>
               <audio className='w-full mt-6' controls>
                 <source src={podcast?.audioUrl} />
               </audio>

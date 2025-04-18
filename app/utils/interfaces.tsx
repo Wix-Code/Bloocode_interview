@@ -13,6 +13,7 @@ export interface PodcastData {
   description: string;
   picture_url: string;
   category_type: string;
+  published_at: string;
   audioUrl?: string;
 }
 
