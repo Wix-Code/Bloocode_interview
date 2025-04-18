@@ -20,31 +20,13 @@ const NewlyAddedEpisodes = () => {
     }
   }
 
-  /*<div className='absolute'>
-          <button
-            onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-red-700 rounded-full shadow-md p-2 hidden md:flex"
-          >
-            <IoIosArrowBack />
-          </button>
-
-          <button
-            onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-red-700 rounded-full shadow-md p-2 hidden md:flex"
-          >
-            <IoIosArrowForward />
-          </button>
-          </div>*/
-
   return (
     <div className="relative">
       <div className="max-w-[1200px] max-xl:mx-5 mx-auto overflow-hidden">
         <p className="text-[24px] max-sm:text-[15px] mt-5 text-[#282828] font-[700]">
           Newly added episodes
         </p>
-
         <div className="relative max-xl:w-full">
-          {/* Scroll Buttons */}
           <div className='absolute  z-10 max-xl:left-0 right-0 top-0 bottom-0 m-auto left-0 flex justify-end items-center'>
             <div className='bg-[#F9F9F9] p-2 shadow-sm rounded-[12px] gap-2 flex items-center justify-center'>
             <button
@@ -62,8 +44,6 @@ const NewlyAddedEpisodes = () => {
             </button>
            </div>
           </div>
-
-          {/* Horizontal Scroll Container */}
           <div
             ref={scrollRef}
             className="flex items-start mt-5 gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 pb-4 hide-scrollbar"

@@ -40,11 +40,9 @@ export default function RootLayout({
         className={`${montserrat.className} antialiased`}
       >
         <ClientProvider>
-          <SplashLoader>
-              <NavBar />
-              {children}
-              <Footer />
-          </SplashLoader>
+            <NavBar />
+            {children}
+            <Footer />
         </ClientProvider>
       </body>
     </html>

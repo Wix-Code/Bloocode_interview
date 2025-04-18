@@ -13,7 +13,7 @@ interface APIResponse {
 }
 
 const fetchPodcasts = async (page : number): Promise<APIResponse> => {
-  const res = await fetch(`https://api.wokpa.app/api/listeners/top-podcasts?page=${page}&per_page=15`); // Replace with your real API
+  const res = await fetch(`https://api.wokpa.app/api/listeners/top-podcasts?page=${page}&per_page=15`);
   if (!res.ok) throw new Error('Failed to fetch podcasts');
   const response = await res.json();
   return {
@@ -68,7 +68,6 @@ export const usePodcastData = (page: number) => {
   return useQuery({
     queryKey: ['podcasts', page],
     queryFn: () => fetchPodcastData(page),
-    //keepPreviousData: true, // Keeps current page visible while loading new
   });
 };
 
@@ -79,7 +78,7 @@ const fetchPodcastDataById = async (id: number | string): Promise<PodcastData> =
   console.log(res, "podcast id")
   console.log(response, "postcast idddd")
 
-  return response.data; // Assuming { message: 'success', data: {...} }
+  return response.data;
 };
 
 export const useFetchPodcastDataById = (id: number | string) => {

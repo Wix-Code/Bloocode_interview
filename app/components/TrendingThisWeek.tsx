@@ -26,7 +26,6 @@ const TrendingThisWeek = () => {
         <p className='text-[24px] max-sm:text-[15px] mb-3 mt-5 text-[#282828] font-[700]'>Trending this week</p>
         <h1 className='text-[#5A5A5A] font-[700] max-sm:text-[14px] text-[20px] border-l-[3px] border-[#CC0001] pl-1'>Educational</h1>
         <div className='relative max-xl:w-full'>
-
           <div className='absolute  z-10 max-xl:left-0 right-0 top-0 bottom-0 m-auto left-0 flex justify-end items-center'>
             <div className='bg-[#F9F9F9] p-2 shadow-sm rounded-[12px] gap-2 flex items-center justify-center'>
               <button

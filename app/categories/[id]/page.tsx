@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import { useSinglePodcast } from '@/app/utils/podcastQuerry'
 import { podcasts } from '@/app/dummyData'
 import Banner from '@/app/components/Banner'
+import Spinner from '@/app/components/Spinner'
 
 const page = () => {
   const params = useParams();
@@ -14,13 +15,22 @@ const page = () => {
   const podcastId = typeof id === 'string' ? id : '';
 
   const { data: podcast, isLoading, isError } = useSinglePodcast(podcastId);
-  console.log(podcastId, 'podcast id')
-  console.log(podcast, 'podcast data')
 
-  //if (!podcastId) return <p>Loading...</p>;
-  if (isLoading) return <p>Loading podcast...</p>;
+  const formatDate = (isoDate : string) => {
+    const date = new Date(isoDate);
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    };
+  
+    return new Intl.DateTimeFormat('en-US', options)
+      .format(date)
+      .toUpperCase(); 
+  };
+  
+  if (isLoading) return <Spinner />;
   if (isError) return <p>Something went wrong</p>;
-  console.log(podcast, 'podcast single')
 
   return (
     <div className='mb-20'>
@@ -30,6 +40,7 @@ const page = () => {
           <div className='flex gap-5 max-lg:flex-col'>
             <img className='w-[157px] max-lg:h-[350px] max-sm:h-[320px] max-lg:w-full object-cover h-[129px]' src={podcast?.picture_url} alt="" />
             <div className='flex w-full flex-col pr-5 gap-4'>
+              <p className='text-[#FFFFFF] text-[20px] font-[700]'>{formatDate(podcast?.published_at || "")}</p>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>{podcast?.title}</p>
               <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{podcast?.description} <span className='text-[#BCFFB6] text-[15px] font-[700]'>READ MORE </span></p>
               <audio className='w-full mt-6' controls>

@@ -1,36 +1,32 @@
 "use client"
 
 import React, { useState } from 'react'
-import { podcasts } from '../dummyData'
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../utils/store';
 import { usePodcastData } from '../utils/podcastQuerry';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from 'react-icons/ri';
 import Spinner from '../components/Spinner';
 import Link from 'next/link';
 
-interface Podcasts { 
-  id: number;
-  name: string;
-  img: string;
-  desc: string;
-  part: string;
-}
 const page = () => {
   const [page, setPage] = useState(1);
   const { data: podcasts, isLoading, error } = usePodcastData(page);
-  const dispatch = useDispatch<AppDispatch>();
-  //const [currentPage, setCurrentPage] = useState(1);
-  const podcastsPerPage = 8;
 
-  /*const totalPages = Math.ceil((podcasts?.length || 0)  / podcastsPerPage);
-  const startIndex = (currentPage - 1) * podcastsPerPage;
-  const currentPodcasts = podcasts?.slice(startIndex, startIndex + podcastsPerPage);*/
-
-  //if (isLoading) return <Spinner />;
+  const formatDate = (isoDate : string) => {
+    const date = new Date(isoDate);
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    };
+  
+    return new Intl.DateTimeFormat('en-US', options)
+      .format(date)
+      .toUpperCase(); 
+  };
+  
+  if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
-  //if (!Array.isArray(podcasts)) return <p>No podcasts available.</p>;
+ 
   return (
     <div>
       <div className='bg-[#2B3221] max-sm:flex-col mb-10 relative p-10 flex items-center gap-7'>
@@ -57,7 +53,7 @@ const page = () => {
                 <div key={category.id} className='flex p-5 max-sm:w-full border-b-[1px] border-[#DCDCDC] flex-row max-sm:flex-col gap-4'>
                   <img className='w-[157px] max-sm:h-[250px] h-[129px] max-sm:w-full object-cover' src={category.picture_url} alt="" />
                   <div className='max-sm:w-full'>
-                    <p className='text-[#828282] text-[13px] font-[700]'>AUG 29, 2023 <span className='text-[#828282]'>45 MINS</span></p>
+                    <p className='text-[#828282] text-[13px] font-[700]'>{formatDate(category.published_at)} <span className='text-[#828282]'>45 MINS</span></p>
                     <p className='text-[#282828]  text-[20px] font-[700]'>{category.title}</p>
                     <Link href={`/podcast/${category.id}`}><p className='text-[#282828] hover:text-[#0f0f0f] text-[15px] font-[500]'>{category.description.slice(0, 350)}...</p></Link>
                     <div className='flex items-center mt-3 gap-4'>

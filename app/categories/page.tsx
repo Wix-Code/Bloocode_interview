@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "../utils/store";
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from "react-icons/ri";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Spinner from "../components/Spinner";
 
 const Page = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const Page = () => {
   const { data: podcasts, isLoading, error } = usePodcasts(page);
   const { data: categories } = useFetchPodcastOtherCategories();
 
+  
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setCategory(e.target.value));
     router.push("?page=1"); // reset to first page on filter
@@ -51,7 +53,7 @@ const Page = () => {
       return a.title.localeCompare(b.title);
     }
     if (sortBy === "date") {
-      return new Date(b.description).getTime() - new Date(a.description).getTime();
+      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
     }
     return 0;
   });
@@ -65,7 +67,8 @@ const Page = () => {
   const paginatedData = isFiltering
     ? sorted.slice((page - 1) * itemsPerPage, page * itemsPerPage)
     : sorted;
-
+  
+  if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
 
   return (
@@ -73,7 +76,6 @@ const Page = () => {
       <div className="flex flex-col gap-4 max-w-[1200px] mx-auto">
         <h1 className="text-[28px] ml-5 text-[#5A5A5A] font-[800] max-sm:text-[20px]">ALL PODCASTS</h1>
         <hr className="w-full h-[1px] border-0 bg-[#DCDCDC]" />
-
         <div className="flex ml-5 mb-3 gap-5 max-sm:flex-col max-sm:gap-2">
           <div className="flex max-sm:flex-col max-md:items-start items-center gap-2">
             <p className="text-[#5A5A5A] text-[16px] font-[700]">Sort by:</p>
@@ -87,9 +89,7 @@ const Page = () => {
               <option className="text-[#5A5A5A] text-[16px] font-[500]" value="date">Date</option>
             </select>
           </div>
-
           <img className="max-sm:hidden" src="/files/line.png" alt="" />
-
           <div className="flex items-center max-sm:items-start max-sm:flex-col gap-2">
             <p className="text-[#5A5A5A] text-[16px] font-[700]">Sort by category:</p>
             <select
@@ -112,16 +112,15 @@ const Page = () => {
         {/* Podcast Cards */}
         <div className="grid max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-3 mx-5 grid-cols-5 gap-6 max-sm:grid-cols-2 max-sm:gap-3">
           {paginatedData.map((podcast) => (
-            <Link href={`/categories/${podcast.id}`}><div key={podcast.id} className="flex flex-col max-sm:gap-[2px] gap-1">
+            <div key={podcast.id} className="flex flex-col max-sm:gap-[2px] gap-1">
               <img className="w-[100%] h-[180px] object-cover" src={podcast.picture_url} alt="" />
-              <h1 className="text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]">
+              <Link href={`/categories/${podcast.id}`}><h1 className="text-[#282828] mt-3 font-[700] max-sm:text-[16px] text-[18px]">
                 {podcast.title.slice(0, 15)}...
-              </h1>
+              </h1></Link>
               <p className="text-[15px] max-sm:text-[13px] text-justify text-[#282828]">
                 EPI2: {podcast.description.slice(0, 40)}...
               </p>
-              <p className="text-[#828282] max-sm:text-[11px] text-[13px]">
-                August <span className="text-[#828282]">45 MINS</span>
+              <p className="text-[#828282] max-sm:text-[11px] text-[13px]">{podcast.published_at || ""}<span className="text-[#828282]">45 MINS</span>
               </p>
               <div className="flex items-center mt-3 gap-2">
                 <button className="bg-[#d6d6d6] w-[30px] h-[30px] rounded-full flex justify-center items-center">
@@ -134,7 +133,7 @@ const Page = () => {
                   <img src="/files/gr.png" />
                 </button>
               </div>
-            </div></Link>
+            </div>
           ))}
         </div>
 

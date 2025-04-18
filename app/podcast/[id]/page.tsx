@@ -15,17 +15,30 @@ const page = () => {
 
   const { data: podcast, isLoading, isError } = useFetchPodcastDataById(podcastId);
   
-  const [isExpanded, setIsExpanded] = useState(false); // ✅ Move to top
+  const [isExpanded, setIsExpanded] = useState(false);
 
   if (isLoading) return <p>Loading podcast...</p>;
   if (isError) return <p>Something went wrong</p>;
   
-  const words = podcast?.description?.split(' ') || []; // ✅ Fallback to empty array
+  const words = podcast?.description?.split(' ') || []; 
   const isLong = words.length > 100;
   const shortText = words.slice(0, 100).join(' ') + '...';
   
   const toggleExpand = () => setIsExpanded(!isExpanded);
-
+  const formatDate = (isoDate : string) => {
+    const date = new Date(isoDate);
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    };
+  
+    return new Intl.DateTimeFormat('en-US', options)
+      .format(date)
+      .toUpperCase(); 
+  };
+  
+  
   console.log(podcast, 'podcast single')
   return (
     <div className='mb-20'>
@@ -35,6 +48,7 @@ const page = () => {
           <div className='flex gap-5 max-lg:flex-col'>
             <img className='w-[157px] max-lg:h-[350px] max-sm:h-[320px] max-lg:w-full object-cover h-[129px]' src={podcast?.picture_url} alt="" />
             <div className='flex w-full flex-col pr-5 gap-4'>
+              <p className='text-[#FFFFFF] text-[13px] font-[700]'>{formatDate(podcast?.published_at || "")}</p>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>{podcast?.title}</p>
               <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{isExpanded || !isLong ? podcast?.description : shortText}{' '}
       {isLong && (
