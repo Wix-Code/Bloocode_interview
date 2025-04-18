@@ -41,7 +41,7 @@ export default function RootLayout({
         className={`${montserrat.className} antialiased`}
       >
         <ClientProvider>
-          <Suspense fallback={<Spinner />}>
+          <Suspense>
             <NavBar />
             {children}
             <Footer />
