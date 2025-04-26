@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import { useFetchPodcastDataById } from '@/app/utils/podcastQuerry'
 import { podcasts } from '@/app/dummyData'
 import Banner from '@/app/components/Banner'
+import Spinner from '@/app/components/Spinner'
 
 const page = () => {
   const params = useParams();
@@ -17,7 +18,7 @@ const page = () => {
   
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (isLoading) return <p>Loading podcast...</p>;
+  if (isLoading) return <Spinner />;
   if (isError) return <p>Something went wrong</p>;
   
   const words = podcast?.description?.split(' ') || []; 

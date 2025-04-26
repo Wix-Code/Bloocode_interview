@@ -16,6 +16,8 @@ const page = () => {
   const podcastId = typeof id === 'string' ? id : '';
 
   const { data: podcast, isLoading, isError } = useSinglePodcast(podcastId);
+  if (isLoading) return <Spinner />;
+  if (isError) return <p>Something went wrong</p>;
 
   const formatDate = (isoDate : string) => {
     const date = new Date(isoDate);
@@ -31,8 +33,6 @@ const page = () => {
   };
   
   console.log(podcast, "Podddddddddddd")
-  if (isLoading) return <Spinner />;
-  if (isError) return <p>Something went wrong</p>;
 
   return (
     <div className='mb-20'>
