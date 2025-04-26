@@ -4,6 +4,7 @@ export interface Podcast {
   description: string;
   picture_url: string;
   published_at: string;
+  created_at: string;
   audioUrl?: string;
   category_type: string
 }

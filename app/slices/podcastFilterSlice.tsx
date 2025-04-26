@@ -2,12 +2,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FilterState {
-  sortBy: 'name' | 'date';
+  sortBy: 'newest' | 'oldest' | 'title';
   category: string;
 }
 
 const initialState: FilterState = {
-  sortBy: 'date',
+  sortBy: 'newest',
   category: '', // or 'All'
 };
 
@@ -15,7 +15,7 @@ const podcastFilterSlice = createSlice({
   name: 'podcastFilter',
   initialState,
   reducers: {
-    setSortBy: (state, action: PayloadAction<'name' | 'date'>) => {
+    setSortBy: (state, action: PayloadAction<'newest' | 'oldest' | 'title'>) => {
       state.sortBy = action.payload;
     },
     setCategory: (state, action: PayloadAction<string>) => {

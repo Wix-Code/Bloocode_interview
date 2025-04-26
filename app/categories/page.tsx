@@ -34,7 +34,7 @@ const Page = () => {
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setSortBy(e.target.value as "name" | "date"));
+    dispatch(setSortBy(e.target.value as "newest" | "oldest" | "title"));
   };
 
   const handlePageChange = (newPage: number) => {
@@ -50,11 +50,15 @@ const Page = () => {
     : podcasts?.data ?? [];
 
   const sorted = [...filtered].sort((a, b) => {
-    if (sortBy === "name") {
-      return a.title.localeCompare(b.title);
+    if (sortBy === "title") {
+      return a.title.localeCompare(b.title)
     }
-    if (sortBy === "date") {
-      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+    if (sortBy === "newest") {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      //return a.title.localeCompare(b.title);
+    }
+    if (sortBy === "oldest") {
+      return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     }
     return 0;
   });
@@ -69,6 +73,7 @@ const Page = () => {
     ? sorted.slice((page - 1) * itemsPerPage, page * itemsPerPage)
     : sorted;
   
+  console.log(sorted, "sorted")
   if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
 
@@ -86,8 +91,9 @@ const Page = () => {
               onChange={handleSortChange}
             >
               <option className="text-[#5A5A5A] text-[16px] font-[500]" value="">All</option>
-              <option className="text-[#5A5A5A] text-[16px] font-[500]" value="name">Title</option>
-              <option className="text-[#5A5A5A] text-[16px] font-[500]" value="date">Date</option>
+              <option className="text-[#5A5A5A] text-[16px] font-[500]" value="title">Title</option>
+              <option className="text-[#5A5A5A] text-[16px] font-[500]" value="newest">Recent</option>
+              <option className="text-[#5A5A5A] text-[16px] font-[500]" value="oldest">Oldest</option>
             </select>
           </div>
           <img className="max-sm:hidden" src="/files/line.png" alt="" />

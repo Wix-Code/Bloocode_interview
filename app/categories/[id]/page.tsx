@@ -30,6 +30,7 @@ const page = () => {
       .toUpperCase(); 
   };
   
+  console.log(podcast, "Podddddddddddd")
   if (isLoading) return <Spinner />;
   if (isError) return <p>Something went wrong</p>;
 
@@ -41,7 +42,7 @@ const page = () => {
           <div className='flex gap-5 max-lg:flex-col'>
             <img className='w-[157px] max-lg:h-[350px] max-sm:h-[320px] max-lg:w-full object-cover h-[129px]' src={podcast?.picture_url} alt="" />
             <div className='flex w-full flex-col pr-5 gap-4'>
-              <p className='text-[#FFFFFF] text-[20px] font-[700]'>{formatDate(podcast?.published_at || "")}</p>
+              <p className='text-[#FFFFFF] text-[20px] font-[700]'>AUGUST 24</p>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>{podcast?.title}</p>
               <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{podcast?.description} <span className='text-[#BCFFB6] text-[15px] font-[700]'>READ MORE </span></p>
               <audio className='w-full mt-6' controls>
