@@ -32,7 +32,7 @@ export const usePodcasts = (page: number) => {
   });
 };
 
-const fetchPodcastById = async (id: number | string): Promise<PodcastData> => {
+const fetchPodcastById = async (id: number | string): Promise<Podcast> => {
   const res = await fetch(`https://api.wokpa.app/api/listeners/podcasts/${id}`);
   if (!res.ok) throw new Error('Failed to fetch podcast');
   const response = await res.json();
@@ -71,7 +71,7 @@ export const usePodcastData = (page: number) => {
   });
 };
 
-const fetchPodcastDataById = async (id: number | string): Promise<PodcastData> => {
+const fetchPodcastDataById = async (id: number | string): Promise<Podcast> => {
   const res = await fetch(`https://api.wokpa.app/api/listeners/episodes/${id}`);
   if (!res.ok) throw new Error('Failed to fetch podcast');
   const response = await res.json();
