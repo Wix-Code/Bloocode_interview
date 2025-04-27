@@ -7,6 +7,7 @@ import { useFetchPodcastDataById } from '@/app/utils/podcastQuerry'
 import { podcasts } from '@/app/dummyData'
 import Banner from '@/app/components/Banner'
 import Spinner from '@/app/components/Spinner'
+import { formatDate } from '@/app/utils/DateFunction'
 
 const page = () => {
   const params = useParams();
@@ -26,19 +27,6 @@ const page = () => {
   const shortText = words.slice(0, 100).join(' ') + '...';
   
   const toggleExpand = () => setIsExpanded(!isExpanded);
-  const formatDate = (isoDate : string) => {
-    const date = new Date(isoDate);
-    const options: Intl.DateTimeFormatOptions = {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    };
-  
-    return new Intl.DateTimeFormat('en-US', options)
-      .format(date)
-      .toUpperCase(); 
-  };
-  
   
   console.log(podcast, 'podcast single')
   return (
@@ -52,14 +40,14 @@ const page = () => {
               <p className='text-[#FFFFFF] text-[13px] font-[700]'>{formatDate(podcast?.published_at || "")}</p>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>{podcast?.title}</p>
               <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{isExpanded || !isLong ? podcast?.description : shortText}{' '}
-      {isLong && (
-        <span
-          onClick={toggleExpand}
-          className='text-[#BCFFB6] text-[15px] font-[700] cursor-pointer'
-        >
-          {isExpanded ? 'READ LESS' : 'READ MORE'}
-        </span>
-      )}</p>
+              {isLong && (
+                <span
+                  onClick={toggleExpand}
+                  className='text-[#BCFFB6] hover:text-[#d6d6d6] text-[15px] font-[700] cursor-pointer'
+                >
+                  {isExpanded ? 'READ LESS' : 'READ MORE'}
+                </span>
+              )}</p>
               <audio className='w-full mt-6' controls>
                 <source src={podcast?.audioUrl} />
               </audio>

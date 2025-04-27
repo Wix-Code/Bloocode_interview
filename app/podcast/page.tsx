@@ -6,24 +6,12 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import { RiPlayLargeFill, RiPlayReverseLargeFill } from 'react-icons/ri';
 import Spinner from '../components/Spinner';
 import Link from 'next/link';
+import { formatDate } from '../utils/DateFunction';
 
 const page = () => {
   const [page, setPage] = useState(1);
   const { data: podcasts, isLoading, error } = usePodcastData(page);
 
-  const formatDate = (isoDate : string) => {
-    const date = new Date(isoDate);
-    const options: Intl.DateTimeFormatOptions = {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    };
-  
-    return new Intl.DateTimeFormat('en-US', options)
-      .format(date)
-      .toUpperCase(); 
-  };
-  
   if (isLoading) return <Spinner />;
   if (error) return <p>Failed to load podcasts</p>;
  
@@ -51,7 +39,7 @@ const page = () => {
             {
               podcasts?.data?.map((category) => (
                 <div key={category.id} className='flex p-5 max-sm:w-full border-b-[1px] border-[#DCDCDC] flex-row max-sm:flex-col gap-4'>
-                  <img className='w-[157px] max-sm:h-[250px] h-[129px] max-sm:w-full object-cover' src={category.picture_url} alt="" />
+                  <img className='w-[157px] max-sm:h-[250px] h-[129px] max-sm:w-full object-cover' src={category.picture_url || '/files/to.png'} alt="" />
                   <div className='max-sm:w-full'>
                     <p className='text-[#828282] text-[13px] font-[700]'>{formatDate(category.published_at)} <span className='text-[#828282]'>45 MINS</span></p>
                     <p className='text-[#282828]  text-[20px] font-[700]'>{category.title}</p>

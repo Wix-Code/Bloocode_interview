@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import { usePodcastData, usePodcasts } from '../utils/podcastQuerry';
 import Link from 'next/link';
+import Spinner from './Spinner';
 
 interface Category { 
   id: number;
@@ -18,7 +19,7 @@ interface Category {
 
 const TechSportsBusiness = () => {
    const [page, setPage] = useState(1);
-    const { data: podcasts, isLoading, error, isFetching } = usePodcasts(page);
+    const { data: podcasts, isLoading, error, isFetching } = usePodcastData(page);
     var settings = {
       infinite: false,
       speed: 500,
@@ -51,7 +52,7 @@ const TechSportsBusiness = () => {
         }
       ]
     };
-  
+    if(isLoading) return <Spinner />
     return (
       <div className='mt-10'>
         <div className='max-w-[1200px] overflow-hidden mx-auto'>
@@ -62,9 +63,9 @@ const TechSportsBusiness = () => {
           <div className="custom-slider-wrapper items-start max-xl:px-3 gap-5 pb-4">
             <Slider {...settings}>
             {
-              podcasts?.data?.map((category) => (
+              podcasts?.data?.slice(0, 15).map((category) => (
                 <div key={category.id} className="snap-start bg-[#F4F4F4] max-sm:w-[180px] p-3 cursor-pointer shrink-0 w-[223px] flex flex-col gap-3">
-                  <Link className='border-0 outline-0' href={`/categories/${category.id}`}><img className='w-[100%] h-[210px] max-sm:h-[150px] object-cover' src={category.picture_url} alt="" />
+                  <Link className='border-0 outline-0' href={`/podcast/${category.id}`}><img className='w-[100%] h-[210px] max-sm:h-[150px] object-cover' src={category.picture_url} alt="" />
                   <h1 className='text-[#282828] max-sm:text-[16px] font-[700] my-3 text-[18px]'>{category.title.slice(0, 15)}...</h1></Link>
                   <div className='flex items-center gap-2'>
                     <button className='bg-[#d6d6d6] w-[30px] h-[30px] rounded-[50%] flex justify-center items-center'><img src="/files/share.png" /></button>

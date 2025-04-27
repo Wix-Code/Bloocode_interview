@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowBack } from 'react-icons/io'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -8,9 +8,11 @@ import { useSinglePodcast } from '@/app/utils/podcastQuerry'
 import { podcasts } from '@/app/dummyData'
 import Banner from '@/app/components/Banner'
 import Spinner from '@/app/components/Spinner'
+import { formatDate } from '@/app/utils/DateFunction'
 
 const page = () => {
   const params = useParams();
+  const [isExpanded, setIsExpanded] = useState(false)
   const id = params?.id;
 
   const podcastId = typeof id === 'string' ? id : '';
@@ -19,18 +21,9 @@ const page = () => {
   if (isLoading) return <Spinner />;
   if (isError) return <p>Something went wrong</p>;
 
-  const formatDate = (isoDate : string) => {
-    const date = new Date(isoDate);
-    const options: Intl.DateTimeFormatOptions = {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    };
-  
-    return new Intl.DateTimeFormat('en-US', options)
-      .format(date)
-      .toUpperCase(); 
-  };
+  const words = podcast?.description?.split(' ') || [];
+  const isLong = words.length > 100; 
+  const shortText = words.slice(0, 100).join(' ') + '...';
   
   console.log(podcast, "Podddddddddddd")
 
@@ -38,13 +31,21 @@ const page = () => {
     <div className='mb-20'>
       <div className='bg-[#2B3221] py-10'>
         <div className='max-w-[1200px] max-xl:mx-5 mx-auto max-lg:pr-0 pr-14 flex flex-col gap-4'>
-          <Link href="/categories"><p className='text-[13px] flex items-center gap-1 text-[#FFFFFF] font-[600]'><IoIosArrowBack /> Back to podcast</p></Link>
+          <Link href="/categories"><p className='text-[13px] flex items-center gap-1 text-[#FFFFFF] font-[600]'><IoIosArrowBack /> Back to categories</p></Link>
           <div className='flex gap-5 max-lg:flex-col'>
             <img className='w-[157px] max-lg:h-[350px] max-sm:h-[320px] max-lg:w-full object-cover h-[129px]' src={podcast?.picture_url} alt="" />
             <div className='flex w-full flex-col pr-5 gap-4'>
-              <p className='text-[#FFFFFF] text-[20px] font-[700]'>AUGUST 24</p>
+              <p className='text-[#FFFFFF] text-[20px] font-[700]'>{formatDate(podcast?.published_at || "")}</p>
               <p className='text-[#FFFFFF] text-[20px] font-[700]'>{podcast?.title}</p>
-              <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{podcast?.description} <span className='text-[#BCFFB6] text-[15px] font-[700]'>READ MORE </span></p>
+              <p className='text-[#FFFFFF] text-justify text-[15px] font-[500]'>{isExpanded || !isLong ? podcast?.description : shortText}{' '}
+              {isLong && (
+                <span
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className='text-[#BCFFB6] hover:text-[#d6d6d6] text-[15px] font-[700] cursor-pointer'
+                >
+                  {isExpanded ? 'READ LESS' : 'READ MORE'}
+                </span>
+              )}</p>
               <audio className='w-full mt-6' controls>
                 <source src={podcast?.audioUrl} />
               </audio>
